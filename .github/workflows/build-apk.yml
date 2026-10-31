@@ -1,0 +1,43 @@
+
+name: Build Aves Custom APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.8'
+          channel: stable
+          cache: true
+
+      - name: Configure Libre flavor
+        run: |
+          cp flavors/pubspec_libre.yaml pubspec.yaml
+          cp flavors/pubspec_libre.lock pubspec.lock
+          sed -i 's/flutter: 3.47.7/flutter: 3.47.8/' pubspec.yaml
+          flutter pub get
+
+      - name: Build debug APK
+        run: flutter build apk --debug --flavor libre -t lib/main_libre.dart
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: aves-j-cstm-debug
+          path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
