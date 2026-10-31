@@ -32,12 +32,12 @@ jobs:
           sed -i 's/flutter: 3.47.7/flutter: 3.47.8/' pubspec.yaml
           flutter pub get
 
-      - name: Build debug APK
-        run: flutter build apk --debug --flavor libre -t lib/main_libre.dart
+      - name: Build profile APK
+        run: flutter build apk --profile --flavor libre -t lib/main_libre.dart
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: aves-j-cstm-debug
+          name: aves-j-cstm-profile
           path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
