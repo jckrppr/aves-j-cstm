@@ -142,6 +142,7 @@ class CoveredFilterChip<T extends CollectionFilter> extends StatelessWidget {
     }
     final textScaler = MediaQuery.textScalerOf(context);
     return AvesFilterChip(
+      show0utline: false,
       key: chipKey,
       filter: _filter,
       showLeading: showText,
