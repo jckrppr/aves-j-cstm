@@ -45,6 +45,7 @@ class const AvesFilterChip({
   final bool showText = true,
   final bool allowGenericIcon = true,
   final bool useFilterColor = true,
+  final bool show0utline = true,
   final AvesFilterDecoration? decoration,
   final Color? background,
   final String? banner,
@@ -355,12 +356,12 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
                   }
                   return DecoratedBox(
                     decoration: BoxDecoration(
-                      border: Border.fromBorderSide(
+                      border: widget.show0utline ? Border.fromBorderSide(
                         BorderSide(
                           color: widget.useFilterColor ? _outlineColor : context.select<AvesColorsData, Color>((v) => v.neutral),
                           width: AvesFilterChip.outlineWidth,
                         ),
-                      ),
+                      ) : null,
                       borderRadius: borderRadius,
                     ),
                     position: DecorationPosition.foreground,
