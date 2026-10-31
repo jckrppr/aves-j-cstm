@@ -66,9 +66,11 @@ class const DecoratedThumbnail({
       ],
     );
 
-    return Container(
+    return ClipRRect(
       // `decoration` with sub logical pixel width yields scintillating borders
       // so we use `foregroundDecoration` instead
+      borderRadius: const BorderRadius.all(Radius.circular(4)),
+      child: Container(
       foregroundDecoration: BoxDecoration(
         border: Border.fromBorderSide(
           BorderSide(
@@ -80,6 +82,7 @@ class const DecoratedThumbnail({
       width: thumbnailWidth,
       height: thumbnailHeight,
       child: child,
-    );
+    ),
+  );
   }
 }
